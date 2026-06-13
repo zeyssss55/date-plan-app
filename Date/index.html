@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Planner 💖 - Atur Kencan Impian Kita!</title>
+    <!-- Google Fonts: Fredoka for Cute Titles, Quicksand for Warm Body Text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Background Floating Hearts Container -->
+    <div class="hearts-container" id="hearts-bg"></div>
+
+    <!-- Main Container -->
+    <main class="app-container">
+        <!-- Step 1: The Invitation -->
+        <section class="step-card active" id="step-1">
+            <div class="card-header">
+                <div class="mascot-container">
+                    <!-- Cute SVG Mascot: Heart with wings/blushing face -->
+                    <svg viewBox="0 0 100 100" class="cute-heart-svg">
+                        <path d="M 50,30 
+                                 C 35,10 5,15 5,45 
+                                 C 5,70 45,90 50,95 
+                                 C 55,90 95,70 95,45 
+                                 C 95,15 65,10 50,30 Z" fill="#ff4b72" />
+                        <!-- Blushing Cheeks -->
+                        <ellipse cx="25" cy="48" rx="8" ry="4" fill="#ff8ba4" opacity="0.6" />
+                        <ellipse cx="75" cy="48" rx="8" ry="4" fill="#ff8ba4" opacity="0.6" />
+                        <!-- Eyes -->
+                        <circle cx="35" cy="42" r="4" fill="#2d1318" />
+                        <circle cx="65" cy="42" r="4" fill="#2d1318" />
+                        <!-- Smile -->
+                        <path d="M 46,50 A 4,4 0 0,0 54,50" stroke="#2d1318" stroke-width="2.5" stroke-linecap="round"
+                            fill="none" />
+                        <!-- Sparkles -->
+                        <path d="M 12,20 L 16,24 M 16,20 L 12,24" stroke="#ffd166" stroke-width="2"
+                            stroke-linecap="round" />
+                        <path d="M 84,20 L 88,24 M 88,20 L 84,24" stroke="#ffd166" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </div>
+                <h1 class="title font-title">Will you go on date with me?</h1>
+            </div>
+            <div class="btn-group" id="invite-buttons">
+                <button type="button" class="btn btn-yes font-title" id="btn-yes">YES! 💖</button>
+                <button type="button" class="btn btn-no font-title" id="btn-no">NO 😢</button>
+            </div>
+        </section>
+
+        <!-- Step 1b: Reaction Page (after YES) -->
+        <section class="step-card" id="step-1b">
+            <div class="reaction-bg-confetti" id="confetti-container"></div>
+            <div class="card-header reaction-header">
+                <div class="reaction-mascot-wrap">
+                    <!-- Surprised/crying happy mascot -->
+                    <svg viewBox="0 0 100 100" class="reaction-mascot-svg" id="reaction-mascot">
+                        <!-- Heart body -->
+                        <path d="M 50,30 C 35,10 5,15 5,45 C 5,70 45,90 50,95 C 55,90 95,70 95,45 C 95,15 65,10 50,30 Z" fill="#ff4b72" />
+                        <!-- Cheeks -->
+                        <ellipse cx="25" cy="50" rx="9" ry="5" fill="#ff8ba4" opacity="0.65" />
+                        <ellipse cx="75" cy="50" rx="9" ry="5" fill="#ff8ba4" opacity="0.65" />
+                        <!-- Surprised eyes (wide open) -->
+                        <circle cx="35" cy="42" r="6" fill="white" />
+                        <circle cx="65" cy="42" r="6" fill="white" />
+                        <circle cx="35" cy="43" r="3.5" fill="#2d1318" />
+                        <circle cx="65" cy="43" r="3.5" fill="#2d1318" />
+                        <!-- Shine in eyes -->
+                        <circle cx="37" cy="41" r="1.2" fill="white" />
+                        <circle cx="67" cy="41" r="1.2" fill="white" />
+                        <!-- Happy-cry mouth (big O shape) -->
+                        <ellipse cx="50" cy="60" rx="7" ry="5" fill="#2d1318" />
+                        <ellipse cx="50" cy="58" rx="5" ry="3" fill="#ff8ba4" />
+                        <!-- Tears -->
+                        <ellipse cx="22" cy="58" rx="3" ry="4.5" fill="#a8d8f0" opacity="0.8" />
+                        <ellipse cx="78" cy="58" rx="3" ry="4.5" fill="#a8d8f0" opacity="0.8" />
+                        <!-- Sparkles / stars -->
+                        <path d="M 10,18 L 13,22 M 13,18 L 10,22" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round" />
+                        <path d="M 87,18 L 90,22 M 90,18 L 87,22" stroke="#ffd166" stroke-width="2.5" stroke-linecap="round" />
+                        <path d="M 5,35 L 7,37 M 7,35 L 5,37" stroke="#ffd166" stroke-width="2" stroke-linecap="round" />
+                        <path d="M 93,35 L 95,37 M 95,35 L 93,37" stroke="#ffd166" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <!-- Floating emoji decorations -->
+                    <span class="float-emoji e1">😭</span>
+                    <span class="float-emoji e2">💖</span>
+                    <span class="float-emoji e3">✨</span>
+                    <span class="float-emoji e4">🎉</span>
+                </div>
+
+                <h2 class="reaction-title font-title">WAIT YOU ACTUALLY<br>SAID YES??</h2>
+                <p class="reaction-emoji-row">😭😭😭</p>
+                <p class="reaction-subtitle">i was so ready for you to say no 😅</p>
+                <p class="reaction-sub2">omg omg omg okay okay let's plan this date fr fr 🥹💕</p>
+            </div>
+
+            <button type="button" class="btn btn-yes-reaction font-title" id="btn-lets-go">
+                LET'S GOOO!! 🎉💖
+            </button>
+        </section>
+
+        <!-- Step 2: Date & Time Selection -->
+        <section class="step-card" id="step-2">
+            <div class="card-header">
+                <h2 class="title-small font-title">When should our date be? 📅</h2>
+                <p class="subtitle">choose the date and time for our date!</p>
+            </div>
+
+            <div class="card-body">
+                <!-- Custom Interactive Calendar -->
+                <div class="calendar-wrapper">
+                    <div class="calendar-header">
+                        <button type="button" class="cal-nav-btn" id="prev-month">&lt;</button>
+                        <h3 class="current-month-year font-title" id="month-year-display">Juni 2026</h3>
+                        <button type="button" class="cal-nav-btn" id="next-month">&gt;</button>
+                    </div>
+                    <div class="calendar-weekdays font-title">
+                        <div>Sen</div>
+                        <div>Sel</div>
+                        <div>Rab</div>
+                        <div>Kam</div>
+                        <div>Jum</div>
+                        <div>Sab</div>
+                        <div>Min</div>
+                    </div>
+                    <div class="calendar-days" id="calendar-days">
+                        <!-- Days will be generated by JS -->
+                    </div>
+                </div>
+
+                <!-- Time Preference Selector -->
+                <div class="time-selection-container">
+                    <h4 class="section-title font-title">Mau jam berapa? ⏰</h4>
+                    <div class="time-options-grid">
+                        <button type="button" class="time-card" data-time="Pagi">
+                            <span class="time-icon">🌅</span>
+                            <span class="time-name">Pagi</span>
+                            <span class="time-hours">08:00 - 11:00</span>
+                        </button>
+                        <button type="button" class="time-card" data-time="Sore">
+                            <span class="time-icon">🌇</span>
+                            <span class="time-name">Sore</span>
+                            <span class="time-hours">15:00 - 18:00</span>
+                        </button>
+                        <button type="button" class="time-card" data-time="Malam">
+                            <span class="time-icon">🌃</span>
+                            <span class="time-name">Malam</span>
+                            <span class="time-hours">19:00 - 22:00</span>
+                        </button>
+                        <button type="button" class="time-card" data-time="Late Night">
+                            <span class="time-icon">🌌</span>
+                            <span class="time-name">Late Night</span>
+                            <span class="time-hours">22:00 - Selesai</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer btn-group-nav">
+                <button type="button" class="btn btn-secondary font-title btn-back" data-prev="1">Kembali</button>
+                <button type="button" class="btn btn-primary font-title" id="btn-to-step3" disabled>Lanjut ➡️</button>
+            </div>
+        </section>
+
+        <!-- Step 3: Choose Activities -->
+        <section class="step-card" id="step-3">
+            <div class="card-header">
+                <h2 class="title-small font-title">What do you want to do? ✨</h2>
+                <p class="subtitle">you can choose more than one activity!</p>
+            </div>
+
+            <div class="card-body">
+                <div class="activities-grid">
+                    <!-- Activity 1: Movie Date -->
+                    <div class="activity-card" data-activity="Movie Date" data-emoji="🍿">
+                        <div class="activity-icon">🍿</div>
+                        <div class="activity-info">
+                            <h4 class="activity-title font-title">Movie Date</h4>
+                            <p class="activity-desc">Nonton bioskop atau netflix di rumah</p>
+                        </div>
+                        <div class="select-badge">✓</div>
+                    </div>
+                    <!-- Activity 2: Cooking Date -->
+                    <div class="activity-card" data-activity="Cooking Date" data-emoji="🍳">
+                        <div class="activity-icon">🍳</div>
+                        <div class="activity-info">
+                            <h4 class="activity-title font-title">Cooking Date</h4>
+                            <p class="activity-desc">kamu yang masak aku yang makan JKJK</p>
+                        </div>
+                        <div class="select-badge">✓</div>
+                    </div>
+                    <!-- Activity 3: Arcade Date -->
+                    <div class="activity-card" data-activity="Arcade Date" data-emoji="🕹️">
+                        <div class="activity-icon">🕹️</div>
+                        <div class="activity-info">
+                            <h4 class="activity-title font-title">Arcade Date</h4>
+                            <p class="activity-desc">Main game bareng dan berburu boneka</p>
+                        </div>
+                        <div class="select-badge">✓</div>
+                    </div>
+                    <!-- Activity 4: Cafe Date -->
+                    <div class="activity-card" data-activity="Cafe Date" data-emoji="☕">
+                        <div class="activity-icon">☕</div>
+                        <div class="activity-info">
+                            <h4 class="activity-title font-title">Cafe Date</h4>
+                            <p class="activity-desc">ngobrol santuy or ngerjain tugas bareng sambil deeptalk wkwkwkw</p>
+                        </div>
+                        <div class="select-badge">✓</div>
+                    </div>
+                    <!-- Activity 5: Picnic Date -->
+                    <div class="activity-card" data-activity="Picnic Date" data-emoji="🧺">
+                        <div class="activity-icon">🧺</div>
+                        <div class="activity-info">
+                            <h4 class="activity-title font-title">Picnic Date</h4>
+                            <p class="activity-desc">buying snacks and bentang tikar di outdoor</p>
+                        </div>
+                        <div class="select-badge">✓</div>
+                    </div>
+                    <!-- Activity 6: Museum Date -->
+                    <div class="activity-card" data-activity="Museum Date" data-emoji="🖼️">
+                        <div class="activity-icon">🖼️</div>
+                        <div class="activity-info">
+                            <h4 class="activity-title font-title">Museum Date</h4>
+                            <p class="activity-desc">Keliling art gallery dan foto-foto estetik</p>
+                        </div>
+                        <div class="select-badge">✓</div>
+                    </div>
+                    <!-- Activity 7: Concert Date -->
+                    <div class="activity-card" data-activity="Concert/Live Music" data-emoji="🎸">
+                        <div class="activity-icon">🎸</div>
+                        <div class="activity-info">
+                            <h4 class="activity-title font-title">Concert Date</h4>
+                            <p class="activity-desc">Sing-along bareng di konser musik (Erk plis)</p>
+                        </div>
+                        <div class="select-badge">✓</div>
+                    </div>
+                    <!-- Activity 8: Sunset Watch -->
+                    <div class="activity-card" data-activity="Berburu Sunset" data-emoji="🌅">
+                        <div class="activity-icon">🌅</div>
+                        <div class="activity-info">
+                            <h4 class="activity-title font-title">Sunset Watch</h4>
+                            <p class="activity-desc">menikmati sunset berdua, melancarkan sy untuk menggombal</p>
+                        </div>
+                        <div class="select-badge">✓</div>
+                    </div>
+                    <!-- Activity 9: Dinner Date -->
+                    <div class="activity-card" data-activity="Romantic Dinner" data-emoji="🕯️">
+                        <div class="activity-icon">🕯️</div>
+                        <div class="activity-info">
+                            <h4 class="activity-title font-title">Dinner Date</h4>
+                            <p class="activity-desc">Makan malam romantis dengan lilin di pecel lele angkringan</p>
+                        </div>
+                        <div class="select-badge">✓</div>
+                    </div>
+                    <!-- Activity 10: Bookstore Date -->
+                    <div class="activity-card" data-activity="Bookstore Date" data-emoji="📚">
+                        <div class="activity-icon">📚</div>
+                        <div class="activity-info">
+                            <h4 class="activity-title font-title">Bookstore Date</h4>
+                            <p class="activity-desc">Pilih-pilih novel atau buku baru bersama atau baca ditempat</p>
+                        </div>
+                        <div class="select-badge">✓</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer btn-group-nav">
+                <button type="button" class="btn btn-secondary font-title btn-back" data-prev="2">Kembali</button>
+                <button type="button" class="btn btn-primary font-title" id="btn-to-step4" disabled>Selesai ➡️</button>
+            </div>
+        </section>
+
+        <!-- Step 4: Summary / Confirmation -->
+        <section class="step-card" id="step-4">
+            <div class="card-header">
+                <div class="celebration-icon">🎉💖</div>
+                <h2 class="title font-title">Yay! It's a Date!</h2>
+                <p class="subtitle">Rencana kencan kita udah siap. Ini dia detailnya:</p>
+            </div>
+
+            <div class="card-body">
+                <div class="summary-container">
+                    <div class="summary-item">
+                        <div class="summary-label">📅 Tanggal Kencan</div>
+                        <div class="summary-value" id="summary-date">Belum dipilih</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">⏰ Waktu</div>
+                        <div class="summary-value" id="summary-time">Belum dipilih</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">✨ Rencana Kegiatan</div>
+                        <div class="summary-value-activities" id="summary-activities">
+                            <!-- Activities will be inserted by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <p class="summary-footer-note">Kirim pesan WhatsApp di bawah ini untuk konfirmasi ke pasanganmu ya!</p>
+            </div>
+
+            <div class="card-footer final-actions">
+                <a href="#" target="_blank" class="btn btn-whatsapp font-title" id="btn-whatsapp">
+                    <svg class="whatsapp-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.725 1.451 5.437.002 9.861-4.416 9.864-9.864.003-2.637-1.019-5.117-2.88-6.98-1.862-1.862-4.343-2.883-6.984-2.884-5.442 0-9.863 4.42-9.867 9.866-.001 1.678.455 3.313 1.32 4.747L1.92 20.91l4.727-1.256zm12.39-7.39c-.3-.15-1.77-.875-2.04-.975-.27-.1-.47-.15-.67.15-.2.3-.77.975-.95 1.175-.18.2-.35.225-.65.075-3.05-1.52-4.17-2.63-4.96-3.99-.27-.47.27-.435.78-.94.12-.12.2-.25.3-.375.1-.125.15-.25.225-.5.075-.25.038-.475-.013-.575-.05-.1-1.77-4.275-1.82-4.4-.13-.3-.26-.33-.35-.33h-.5c-.2-.01-.45.075-.68.325-.23.25-1 1-1 2.425s1.02 2.8 1.17 3c.15.2 2 3.05 4.84 4.275.68.29 1.2.46 1.62.6.68.21 1.3.18 1.79.11.54-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.08-.13-.27-.2-.57-.35z"
+                            fill="#fff" />
+                    </svg>
+                    Kirim WhatsApp 📱💬
+                </a>
+                <button type="button" class="btn btn-secondary font-title" id="btn-reset">Atur Ulang Rencana 🔄</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

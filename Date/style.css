@@ -1,0 +1,840 @@
+:root {
+    --primary-color: #ff4b72;
+    --primary-hover: #ff2a56;
+    --primary-light: #fff0f3;
+    --primary-glow: rgba(255, 75, 114, 0.3);
+    
+    --secondary-color: #ffd166;
+    --text-dark: #3a2226;
+    --text-light: #7c5d63;
+    --bg-gradient: linear-gradient(135deg, #ffeef1 0%, #ffdee4 40%, #ffccd5 100%);
+    
+    --card-bg: rgba(255, 255, 255, 0.75);
+    --card-border: rgba(255, 255, 255, 0.6);
+    --card-shadow: 0 20px 50px rgba(255, 105, 135, 0.15);
+    
+    --border-radius-lg: 24px;
+    --border-radius-md: 16px;
+    --border-radius-sm: 12px;
+    
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* bouncy */
+}
+
+/* Global Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-gradient);
+    overflow-x: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+.font-title {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+}
+
+/* Background Hearts Animation */
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -50px;
+    color: var(--primary-color);
+    fill: currentColor;
+    opacity: 0.4;
+    filter: drop-shadow(0 2px 5px rgba(255, 75, 114, 0.2));
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.6);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-105vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* App Container */
+.app-container {
+    width: 100%;
+    max-width: 580px;
+    z-index: 1;
+    position: relative;
+    perspective: 1000px;
+}
+
+/* Step Card Base - Glassmorphism */
+.step-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--card-shadow);
+    padding: 40px 30px;
+    display: none;
+    flex-direction: column;
+    gap: 30px;
+    transform: rotateX(10deg) translateY(30px);
+    opacity: 0;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1), 
+                opacity 0.6s ease;
+    position: relative;
+}
+
+.step-card.active {
+    display: flex;
+    transform: rotateX(0deg) translateY(0);
+    opacity: 1;
+}
+
+/* Card Header */
+.card-header {
+    text-align: center;
+    display: flex;
+    flex-direction: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.title {
+    font-size: 2.2rem;
+    color: var(--text-dark);
+    line-height: 1.25;
+}
+
+.title-small {
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    line-height: 1.3;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: var(--text-light);
+    max-width: 420px;
+    margin: 0 auto;
+    font-weight: 700;
+}
+
+.mascot-container {
+    margin-bottom: 10px;
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 8px 16px rgba(255, 75, 114, 0.25));
+    animation: heartbeat 2s infinite ease-in-out;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+.cute-heart-svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Buttons Styles */
+.btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 10px;
+    height: 60px; /* fixed height area to prevent layout shifting when No moves */
+}
+
+.btn {
+    padding: 16px 32px;
+    font-size: 1.15rem;
+    border: none;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: transform var(--transition-normal), 
+                box-shadow var(--transition-normal), 
+                background-color var(--transition-fast);
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 700;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn-yes {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 10px 20px var(--primary-glow);
+}
+
+.btn-yes:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 25px var(--primary-glow);
+}
+
+.btn-no {
+    background-color: #f1eae3;
+    color: var(--text-light);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 10;
+}
+
+/* For evading movement class - applied programmatically */
+.btn-no.evading {
+    position: absolute;
+    transition: top 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                left 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    pointer-events: auto;
+}
+
+/* Next / Back navigation buttons */
+.btn-group-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    flex: 1.5;
+    box-shadow: 0 8px 16px var(--primary-glow);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px var(--primary-glow);
+}
+
+.btn-primary:disabled {
+    background-color: #e0d0d3;
+    color: #a39093;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: var(--text-light);
+    border: 1px solid rgba(255, 75, 114, 0.15);
+    flex: 1;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* Step 2 Content - Calendar & Time */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-height: 480px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+/* Custom Scrollbar for Card Body */
+.card-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.card-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.card-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 75, 114, 0.15);
+    border-radius: 10px;
+}
+
+.card-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 75, 114, 0.3);
+}
+
+/* Calendar Styling */
+.calendar-wrapper {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 75, 114, 0.1);
+    border-radius: var(--border-radius-md);
+    padding: 16px;
+    box-shadow: 0 8px 24px rgba(255, 75, 114, 0.04);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.current-month-year {
+    color: var(--text-dark);
+    font-size: 1.15rem;
+}
+
+.cal-nav-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-fast);
+}
+
+.cal-nav-btn:hover {
+    background-color: var(--primary-light);
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 6px;
+    text-align: center;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: background-color var(--transition-fast), 
+                transform var(--transition-fast), 
+                color var(--transition-fast);
+}
+
+.calendar-day:hover:not(.disabled):not(.selected) {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.calendar-day.disabled {
+    color: #d0c0c2;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.calendar-day.today {
+    box-shadow: inset 0 0 0 1.5px var(--primary-color);
+}
+
+.calendar-day.selected {
+    background-color: var(--primary-color);
+    color: white !important;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+/* Time Selection Styling */
+.time-selection-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.section-title {
+    font-size: 1.15rem;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.time-options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.time-card {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 75, 114, 0.1);
+    border-radius: var(--border-radius-sm);
+    padding: 14px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: transform var(--transition-normal), 
+                border-color var(--transition-fast), 
+                box-shadow var(--transition-normal), 
+                background-color var(--transition-fast);
+}
+
+.time-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-color);
+    background-color: var(--primary-light);
+}
+
+.time-icon {
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+}
+
+.time-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.time-hours {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+/* Time Selected State */
+.time-card.selected {
+    background-color: var(--primary-light);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 6px 15px var(--primary-glow);
+    transform: scale(1.02);
+}
+
+/* Step 3 - Activities Grid */
+.activities-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+@media (min-width: 480px) {
+    .activities-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.activity-card {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 75, 114, 0.1);
+    border-radius: var(--border-radius-md);
+    padding: 14px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-normal), 
+                border-color var(--transition-fast), 
+                box-shadow var(--transition-normal), 
+                background-color var(--transition-fast);
+}
+
+.activity-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-color);
+    background: var(--primary-light);
+}
+
+.activity-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    transition: transform var(--transition-normal);
+}
+
+.activity-card:hover .activity-icon {
+    transform: scale(1.15) rotate(5deg);
+}
+
+.activity-info {
+    flex: 1;
+}
+
+.activity-title {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+}
+
+.activity-desc {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    line-height: 1.25;
+}
+
+.select-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 18px;
+    height: 18px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: scale(0);
+    transition: transform var(--transition-normal), 
+                opacity var(--transition-fast);
+}
+
+/* Activity Selected State */
+.activity-card.selected {
+    background: var(--primary-light);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 6px 15px var(--primary-glow);
+}
+
+.activity-card.selected .select-badge {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Step 4 - Summary Page */
+.celebration-icon {
+    font-size: 3.5rem;
+    margin-bottom: 5px;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+}
+
+.summary-container {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px dashed var(--primary-color);
+    border-radius: var(--border-radius-md);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 8px 30px rgba(255, 75, 114, 0.05);
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-bottom: 1px solid rgba(255, 75, 114, 0.1);
+    padding-bottom: 12px;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.summary-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+.summary-value {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.summary-value-activities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.summary-tag {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 1px solid rgba(255, 75, 114, 0.15);
+}
+
+.summary-footer-note {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.final-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.btn-whatsapp {
+    background-color: #25d366;
+    color: white;
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+    text-decoration: none; /* simple resetting links */
+}
+
+.btn-whatsapp:hover {
+    background-color: #1ebd5a;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(37, 211, 102, 0.35);
+}
+
+.whatsapp-icon {
+    width: 20px;
+    height: 20px;
+    fill: white;
+}
+
+/* Animations and media queries responsive adaptations */
+@media (max-width: 480px) {
+    .step-card {
+        padding: 30px 20px;
+    }
+    
+    .title {
+        font-size: 1.8rem;
+    }
+    
+    .title-small {
+        font-size: 1.5rem;
+    }
+    
+    .btn {
+        padding: 14px 24px;
+        font-size: 1rem;
+    }
+}
+
+/* ==========================================
+   REACTION PAGE (Step 1b) - "WAIT YOU ACTUALLY SAID YES??"
+   ========================================== */
+
+/* Confetti container */
+.reaction-bg-confetti {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: var(--border-radius-lg);
+    z-index: 0;
+}
+
+.confetti-piece {
+    position: absolute;
+    opacity: 0.9;
+    animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+    0%   { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+    80%  { opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* Reaction Page Header */
+.reaction-header {
+    position: relative;
+    z-index: 1;
+    gap: 16px;
+}
+
+/* Mascot Wrapper with floating emojis */
+.reaction-mascot-wrap {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 4px;
+}
+
+.reaction-mascot-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 10px 20px rgba(255, 75, 114, 0.3));
+    animation: surpriseBounce 0.6s cubic-bezier(0.34, 1.9, 0.64, 1) both,
+               wiggle 2.5s 0.7s ease-in-out infinite;
+}
+
+@keyframes surpriseBounce {
+    0%   { transform: scale(0.3) rotate(-15deg); opacity: 0; }
+    60%  { transform: scale(1.18) rotate(5deg); }
+    80%  { transform: scale(0.95) rotate(-3deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    20%      { transform: rotate(-6deg); }
+    40%      { transform: rotate(6deg); }
+    60%      { transform: rotate(-4deg); }
+    80%      { transform: rotate(4deg); }
+}
+
+/* Floating emoji decorations */
+.float-emoji {
+    position: absolute;
+    font-size: 1.4rem;
+    animation: floatEmoji 3s ease-in-out infinite;
+    pointer-events: none;
+    user-select: none;
+}
+
+.float-emoji.e1 { top: -10px; left: -14px; animation-delay: 0s; }
+.float-emoji.e2 { top: -14px; right: -10px; animation-delay: 0.4s; }
+.float-emoji.e3 { bottom: 5px; left: -20px; animation-delay: 0.8s; }
+.float-emoji.e4 { bottom: 0; right: -18px; animation-delay: 1.2s; }
+
+@keyframes floatEmoji {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%       { transform: translateY(-10px) scale(1.15); }
+}
+
+/* Reaction Title */
+.reaction-title {
+    font-size: 2rem;
+    color: var(--primary-color);
+    line-height: 1.2;
+    text-align: center;
+    text-shadow: 0 3px 12px rgba(255, 75, 114, 0.25);
+    animation: titlePop 0.5s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    letter-spacing: 0.5px;
+}
+
+@keyframes titlePop {
+    0%   { transform: scale(0.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.reaction-emoji-row {
+    font-size: 1.8rem;
+    letter-spacing: 6px;
+    animation: emojiPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes emojiPulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.12); }
+}
+
+.reaction-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    font-weight: 700;
+    text-align: center;
+    animation: fadeSlideUp 0.5s 0.4s ease both;
+}
+
+.reaction-sub2 {
+    font-size: 0.92rem;
+    color: var(--text-light);
+    font-weight: 500;
+    text-align: center;
+    max-width: 320px;
+    line-height: 1.5;
+    animation: fadeSlideUp 0.5s 0.55s ease both;
+}
+
+@keyframes fadeSlideUp {
+    0%   { transform: translateY(12px); opacity: 0; }
+    100% { transform: translateY(0);    opacity: 1; }
+}
+
+/* "LET'S GOOO" Button */
+.btn-yes-reaction {
+    width: 100%;
+    padding: 18px 32px;
+    font-size: 1.3rem;
+    background: linear-gradient(135deg, #ff4b72 0%, #ff7b9c 100%);
+    color: white;
+    border-radius: var(--border-radius-md);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 12px 28px rgba(255, 75, 114, 0.35);
+    position: relative;
+    z-index: 1;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    animation: fadeSlideUp 0.5s 0.65s ease both;
+    letter-spacing: 0.5px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+}
+
+.btn-yes-reaction:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 18px 36px rgba(255, 75, 114, 0.45);
+}
+
+.btn-yes-reaction:active {
+    transform: scale(0.97);
+}
